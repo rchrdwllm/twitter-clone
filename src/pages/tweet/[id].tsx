@@ -78,7 +78,7 @@ const TweetDetails = ({ initialId }: { initialId: any }) => {
 
             imagesLoaded(images, () => setMounted(true));
         }
-    }, [tweetsCollection]);
+    }, [tweetsCollection]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const addReply = () => {
         const month = new Intl.DateTimeFormat("en-US", {
@@ -142,7 +142,8 @@ const TweetDetails = ({ initialId }: { initialId: any }) => {
         <>
             <Head>
                 <title>
-                    {tweet.author.name} on Twitter: "{tweet.content}" / Twitter
+                    {tweet.author.name} on Twitter: &quot;{tweet.content}&quot;
+                    / Twitter
                 </title>
             </Head>
             <div className="flex-grow">
@@ -162,6 +163,7 @@ const TweetDetails = ({ initialId }: { initialId: any }) => {
                                     width={50}
                                     objectFit="contain"
                                     className="user-img"
+                                    alt="user icon"
                                 />
                             ) : (
                                 ""

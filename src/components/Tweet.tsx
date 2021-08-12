@@ -43,7 +43,7 @@ const Tweet: FunctionComponent<TweetType> = ({
         } else {
             dispatch({ type: "INITIALIZE", payload: {} });
         }
-    }, [session]);
+    }, [session]); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         const imagesLoaded = require("imagesloaded");
@@ -68,6 +68,7 @@ const Tweet: FunctionComponent<TweetType> = ({
                         objectFit="contain"
                         loading="lazy"
                         placeholder="blur"
+                        alt="user icon"
                         blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO8/epfPQAIrwNEHKvToQAAAABJRU5ErkJggg=="
                     />
                 </div>

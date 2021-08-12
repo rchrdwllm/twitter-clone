@@ -67,6 +67,7 @@ const ComposeTweet = () => {
                             className={`user-img transition-opacity ${
                                 !mounted && "opacity-0"
                             }`}
+                            alt="user icon"
                             src={session?.user?.image as any}
                             height={50}
                             width={50}

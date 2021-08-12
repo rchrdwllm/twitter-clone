@@ -127,6 +127,7 @@ const DesktopNav = () => {
                         width={40}
                         objectFit="contain"
                         placeholder="blur"
+                        alt="user icon"
                         blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO8/epfPQAIrwNEHKvToQAAAABJRU5ErkJggg=="
                     />
                 </div>

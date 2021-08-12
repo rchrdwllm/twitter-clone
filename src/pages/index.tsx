@@ -16,7 +16,9 @@ const Home: FunctionComponent<HomeProps> = ({ session }) => {
         return (
             <>
                 <Head>
-                    <title>Twitter. It's what's happening / Twitter</title>
+                    <title>
+                        Twitter. It&apos;s what&apos;s happening / Twitter
+                    </title>
                 </Head>
                 <div className="lg:flex flex-row-reverse min-h-screen w-full">
                     <div className="p-8 sm:p-12 md:px-24 lg:p-12">
@@ -120,6 +122,7 @@ const Home: FunctionComponent<HomeProps> = ({ session }) => {
                                 layout="fill"
                                 objectFit="cover"
                                 placeholder="blur"
+                                alt="twitter banner"
                                 blurDataURL="https://abs.twimg.com/sticky/illustrations/lohp_en_850x623.png"
                             />
                         </div>

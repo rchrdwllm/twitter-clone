@@ -22,7 +22,7 @@ const Tweets = () => {
 
             setTweets(tweets);
         }
-    }, [tweetsCollection]);
+    }, [tweetsCollection]); // eslint-disable-line react-hooks/exhaustive-deps
 
     if (!tweets) {
         return (

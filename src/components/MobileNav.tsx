@@ -44,6 +44,7 @@ const MobileNav = () => {
                     height={30}
                     width={30}
                     objectFit="contain"
+                    alt="user icon"
                     className={`user-img cursor-pointer transition-opacity ${
                         !mounted && "opacity-0"
                     }`}
