@@ -19,7 +19,11 @@ const BottomBar = () => {
     return (
         <nav className="fixed lg:hidden bg-white z-10 bottom-0 flex justify-between items-center w-full py-2 px-12 border-t">
             <Link href="/">
-                <a className="link-container text-gray-500 rounded-full p-2">
+                <a
+                    className={`link-container text-gray-500 rounded-full p-2 ${
+                        router.pathname === "/" && "active"
+                    }`}
+                >
                     <HomeIcon className="link-icon" />
                 </a>
             </Link>

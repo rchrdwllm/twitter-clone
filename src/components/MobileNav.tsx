@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import {
     XIcon,
     DotsCircleHorizontalIcon,
@@ -10,7 +9,6 @@ import {
     BookmarkIcon,
     LightningBoltIcon,
     NewspaperIcon,
-    ArrowLeftIcon,
 } from "@heroicons/react/outline";
 import { signOut, useSession } from "next-auth/client";
 import { motion } from "framer-motion";
@@ -87,15 +85,15 @@ const MobileNav = () => {
                 </div>
                 <div className="flex space-x-7 text-gray-500 px-4 mt-4">
                     <p>
-                        <span className="font-bold text-black">45</span>{" "}
+                        <span className="font-bold text-black">0</span>{" "}
                         following
                     </p>
                     <p>
-                        <span className="font-bold text-black">45</span>{" "}
+                        <span className="font-bold text-black">10M</span>{" "}
                         followers
                     </p>
                 </div>
-                <ul className="mt-2">
+                <ul className="mt-2 border-b">
                     <li>
                         <a href="#" className="link-container">
                             <UserIcon className="link-icon" />
@@ -134,7 +132,7 @@ const MobileNav = () => {
                     </li>
                 </ul>
                 <button
-                    className="block w-full text-left p-4 border-t transition-colors hover:bg-gray-100"
+                    className="block w-full text-left p-4 transition-colors hover:bg-gray-100"
                     onClick={() => signOut()}
                 >
                     Log out

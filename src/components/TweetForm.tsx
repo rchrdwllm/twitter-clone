@@ -18,7 +18,11 @@ export const addTweet = (content: string | number, session: Session) => {
     }).format(new Date());
     const day = new Date().getDate();
     const year = new Date().getFullYear();
-    const currentHour = Math.abs(new Date().getHours() - 12);
+    const currentHour = Math.abs(
+        new Date().getHours() >= 12
+            ? new Date().getHours() - 12
+            : new Date().getHours()
+    );
     const minutes = new Date().getMinutes();
     const id = v4();
 

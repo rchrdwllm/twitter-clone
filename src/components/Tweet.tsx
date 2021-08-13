@@ -23,7 +23,6 @@ const Tweet: FunctionComponent<TweetType> = ({
     replies,
     retweets,
 }) => {
-    const [shouldAnimate, setAnimate] = useState<boolean>(false);
     const { buttonVariant } = useAnimations();
     const [session] = useSession();
     const router = useRouter();
@@ -31,6 +30,7 @@ const Tweet: FunctionComponent<TweetType> = ({
         isAuthor: false,
         liked: false,
         retweeted: false,
+        toggleDelete: false,
     });
     const [mounted, setMounted] = useState<boolean>(false);
 
@@ -91,7 +91,9 @@ const Tweet: FunctionComponent<TweetType> = ({
                             <div className="flex-grow flex justify-end">
                                 <button
                                     className="btn text-gray-500 hover:text-blue-500 pointer-events-auto"
-                                    onClick={() => setAnimate(!shouldAnimate)}
+                                    onClick={() =>
+                                        dispatch({ type: "TOGGLE_DELETE" })
+                                    }
                                 >
                                     <DotsHorizontalIcon className="btn-icon" />
                                 </button>
@@ -169,7 +171,7 @@ const Tweet: FunctionComponent<TweetType> = ({
             <motion.div
                 variants={buttonVariant}
                 initial="initial"
-                animate={shouldAnimate ? "animate" : "initial"}
+                animate={state.toggleDelete ? "animate" : "initial"}
                 className="absolute z-10 top-12 right-4 bg-white rounded-lg shadow-md overflow-hidden"
             >
                 <button

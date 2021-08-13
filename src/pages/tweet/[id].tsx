@@ -18,6 +18,8 @@ import { useSession } from "next-auth/client";
 import { v4 } from "uuid";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { MutableRefObject } from "react";
+import { motion } from "framer-motion";
+import { useAnimations } from "../../hooks/useAnimations";
 
 const TweetDetails = ({ initialId }: { initialId: any }) => {
     const router = useRouter();
@@ -28,6 +30,7 @@ const TweetDetails = ({ initialId }: { initialId: any }) => {
         isAuthor: false,
         liked: false,
         retweeted: false,
+        toggleDelete: false,
     });
     const [reply, setReply] = useState<string | number>("");
     const [tweetsCollection, tweetsLoading] = useCollection(
@@ -38,6 +41,7 @@ const TweetDetails = ({ initialId }: { initialId: any }) => {
     const replyInput: MutableRefObject<null | HTMLTextAreaElement> =
         useRef<null | HTMLTextAreaElement>(null);
     const [mounted, setMounted] = useState<boolean>(false);
+    const { buttonVariant } = useAnimations();
 
     useEffect(() => {
         if (session) {
@@ -153,7 +157,11 @@ const TweetDetails = ({ initialId }: { initialId: any }) => {
                     </button>
                     <h1 className="font-bold text-xl flex-grow">Thread</h1>
                 </header>
-                <main className={`p-4 border-b ${!mounted && "opacity-0"}`}>
+                <main
+                    className={`relative p-4 border-b ${
+                        !mounted && "opacity-0"
+                    }`}
+                >
                     <div className="flex items-center space-x-3">
                         <div className="min-w-max flex items-center">
                             {tweet.author.image ? (
@@ -176,7 +184,12 @@ const TweetDetails = ({ initialId }: { initialId: any }) => {
                             </p>
                         </div>
                         {state.isAuthor ? (
-                            <button className="btn self-start text-gray-500 hover:text-blue-500">
+                            <button
+                                className="btn self-start text-gray-500 hover:text-blue-500"
+                                onClick={() =>
+                                    dispatch({ type: "TOGGLE_DELETE" })
+                                }
+                            >
                                 <DotsHorizontalIcon className="btn-icon" />
                             </button>
                         ) : (
@@ -292,6 +305,26 @@ const TweetDetails = ({ initialId }: { initialId: any }) => {
                             Reply
                         </button>
                     </div>
+                    <motion.div
+                        variants={buttonVariant}
+                        initial="initial"
+                        animate={state.toggleDelete ? "animate" : "initial"}
+                        className="absolute z-10 top-12 right-4 bg-white rounded-lg shadow-md overflow-hidden"
+                    >
+                        <button
+                            className="border-none outline-none py-2 px-4 transition-colors hover:bg-blue-100 hover:text-blue-500"
+                            onClick={() => {
+                                dispatch({
+                                    type: "DELETE_TWEET",
+                                    payload: { id },
+                                });
+
+                                router.replace("/");
+                            }}
+                        >
+                            Delete Tweet
+                        </button>
+                    </motion.div>
                 </main>
                 {replies
                     ? replies.length

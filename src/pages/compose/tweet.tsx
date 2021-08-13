@@ -13,12 +13,14 @@ import {
 } from "@heroicons/react/outline";
 import { addTweet } from "../../components/TweetForm";
 import { Session } from "next-auth";
+import { useWidth } from "../../hooks/useWidth";
 
 const ComposeTweet = () => {
     const [session] = useSession();
     const router = useRouter();
     const [content, setContent] = useState<string | number>("");
     const [mounted, setMounted] = useState<boolean>(false);
+    const width = useWidth();
 
     useEffect(() => {
         const imagesLoaded = require("imagesloaded");
@@ -28,6 +30,8 @@ const ComposeTweet = () => {
     }, []);
 
     if (!session) router.replace("/");
+
+    if (width >= 1024) router.replace("/");
 
     return (
         <>

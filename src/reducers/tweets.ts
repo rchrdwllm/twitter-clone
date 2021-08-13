@@ -26,6 +26,7 @@ interface TweetStates {
     isAuthor: boolean;
     liked: boolean;
     retweeted: boolean;
+    toggleDelete: boolean;
 }
 
 export const tweets = (state: TweetStates, action: AnyAction) => {
@@ -104,11 +105,34 @@ export const tweets = (state: TweetStates, action: AnyAction) => {
 
             return { ...state, retweeted: !state.retweeted };
         case "DELETE_TWEET":
+            const handleTweets = (tweet: Tweet) => {
+                const filteredReplies = tweet.replies.filter(
+                    (id) => id !== action.payload.id
+                );
+
+                firebase.firestore().collection("tweets").doc(tweet.id).update({
+                    replies: filteredReplies,
+                });
+            };
+
+            firebase
+                .firestore()
+                .collection("tweets")
+                .get()
+                .then((snap) => {
+                    snap.forEach((doc) => handleTweets(doc.data() as Tweet));
+                });
+
             firebase
                 .firestore()
                 .collection("tweets")
                 .doc(action.payload.id)
                 .delete();
+        case "TOGGLE_DELETE":
+            return {
+                ...state,
+                toggleDelete: !state.toggleDelete,
+            };
         default:
             return state;
     }
