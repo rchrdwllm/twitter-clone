@@ -30,7 +30,7 @@ const Tweet: FunctionComponent<TweetType> = ({
         isAuthor: false,
         liked: false,
         retweeted: false,
-        toggleDelete: false,
+        toggleOptions: false,
     });
     const [mounted, setMounted] = useState<boolean>(false);
 
@@ -171,11 +171,11 @@ const Tweet: FunctionComponent<TweetType> = ({
             <motion.div
                 variants={buttonVariant}
                 initial="initial"
-                animate={state.toggleDelete ? "animate" : "initial"}
+                animate={state.toggleOptions ? "animate" : "initial"}
                 className="absolute z-10 top-12 right-4 bg-white rounded-lg shadow-md overflow-hidden"
             >
                 <button
-                    className="border-none outline-none py-2 px-4 transition-colors hover:bg-blue-100 hover:text-blue-500"
+                    className="tweet-options-btn"
                     onClick={() =>
                         dispatch({
                             type: "DELETE_TWEET",
@@ -184,6 +184,17 @@ const Tweet: FunctionComponent<TweetType> = ({
                     }
                 >
                     Delete Tweet
+                </button>
+                <button
+                    className="tweet-options-btn"
+                    onClick={() =>
+                        dispatch({
+                            type: "DELETE_TWEET",
+                            payload: { id },
+                        })
+                    }
+                >
+                    Edit Tweet
                 </button>
             </motion.div>
         </article>
