@@ -26,7 +26,7 @@ interface TweetStates {
     isAuthor: boolean;
     liked: boolean;
     retweeted: boolean;
-    toggleDelete: boolean;
+    toggleOptions: boolean;
 }
 
 export const tweets = (state: TweetStates, action: AnyAction) => {
@@ -131,7 +131,7 @@ export const tweets = (state: TweetStates, action: AnyAction) => {
         case "TOGGLE_DELETE":
             return {
                 ...state,
-                toggleDelete: !state.toggleDelete,
+                toggleOptions: !state.toggleOptions,
             };
         default:
             return state;
