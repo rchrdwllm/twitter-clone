@@ -3,6 +3,7 @@ import { useCollection } from "react-firebase-hooks/firestore";
 import firebase from "../../firebase";
 import Tweet from "./Tweet";
 import { Tweet as TweetType } from "../reducers/tweets";
+import { useDispatch } from "react-redux";
 
 const Tweets = () => {
     const [tweetsCollection, tweetsLoading] = useCollection(
@@ -10,8 +11,11 @@ const Tweets = () => {
         {}
     );
     const [tweets, setTweets] = useState<TweetType[] | null>(null);
+    const dispatch = useDispatch();
 
     useEffect(() => {
+        dispatch({ type: "MOUNT_COMPONENT", payload: { isMounted: false } });
+
         if (!tweetsLoading && tweetsCollection) {
             const filteredTweets = tweetsCollection.docs.map(
                 (doc) => doc.data() as TweetType
@@ -21,6 +25,8 @@ const Tweets = () => {
             );
 
             setTweets(tweets);
+
+            dispatch({ type: "MOUNT_COMPONENT", payload: { isMounted: true } });
         }
     }, [tweetsCollection]); // eslint-disable-line react-hooks/exhaustive-deps
 

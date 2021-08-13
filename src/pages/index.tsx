@@ -6,12 +6,18 @@ import { Session } from "next-auth";
 import TweetForm from "../components/TweetForm";
 import { FunctionComponent } from "react";
 import ComposeTweetBtn from "../components/ComposeTweetBtn";
+import Loader from "../components/Loader";
+import { RootStateOrAny, useSelector } from "react-redux";
 
 interface HomeProps {
     session: Session;
 }
 
 const Home: FunctionComponent<HomeProps> = ({ session }) => {
+    const mounted = useSelector((state: RootStateOrAny) => state.mounted);
+
+    console.log(mounted);
+
     if (!session)
         return (
             <>
@@ -146,6 +152,11 @@ const Home: FunctionComponent<HomeProps> = ({ session }) => {
                 <title>Home / Twitter</title>
             </Head>
             <div className="relative flex-grow">
+                {!mounted && (
+                    <div className="w-full h-screen flex justify-center items-center">
+                        <Loader />
+                    </div>
+                )}
                 <header className="hidden lg:flex sticky bg-white top-0 left-0 z-20 justify-between items-center p-4 py-3 border-b space-x-6">
                     <h1 className="font-emphasis text-xl flex-grow">Home</h1>
                 </header>
