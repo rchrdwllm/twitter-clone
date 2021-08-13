@@ -8,9 +8,37 @@ button {
     @apply border-none outline-none;
 }
 
+.loader {
+    border: 4px solid #e5e7eb;
+    border-radius: 50%;
+    border-top: 4px solid #3b82f6;
+    width: 1.5rem;
+    height: 1.5rem;
+    -webkit-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 @layer components {
     .log-in-btn {
-        border: 1px solid rgb(229, 231, 235);
+        border: 1px solid #e5e7eb;
         @apply flex justify-center items-center space-x-2 font-emphasis w-full rounded-full p-4 md:whitespace-nowrap md:w-min md:px-24;
     }
 
