@@ -4,6 +4,7 @@ import MobileNav from "../components/MobileNav";
 import BottomBar from "../components/BottomBar";
 import DesktopNav from "../components/DesktopNav";
 import Trends from "../components/Trends";
+import Head from "next/head";
 
 const Layout: FunctionComponent = ({ children }) => {
     const width = useWidth();
@@ -14,12 +15,17 @@ const Layout: FunctionComponent = ({ children }) => {
     if (!mounted) return null;
 
     return (
-        <div className="lg:flex">
-            {width < 1024 ? <MobileNav /> : <DesktopNav />}
-            {children}
-            <BottomBar />
-            <Trends />
-        </div>
+        <>
+            <Head>
+                <title>Twitter</title>
+            </Head>
+            <div className="lg:flex">
+                {width < 1024 ? <MobileNav /> : <DesktopNav />}
+                {children}
+                <BottomBar />
+                <Trends />
+            </div>
+        </>
     );
 };
 
