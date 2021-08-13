@@ -20,6 +20,7 @@ import { useCollection } from "react-firebase-hooks/firestore";
 import { MutableRefObject } from "react";
 import { motion } from "framer-motion";
 import { useAnimations } from "../../hooks/useAnimations";
+import Loader from "../../components/Loader";
 
 const TweetDetails = ({ initialId }: { initialId: any }) => {
     const router = useRouter();
@@ -137,7 +138,11 @@ const TweetDetails = ({ initialId }: { initialId: any }) => {
             .get()
             .then((snapshot) => setTweet(snapshot.data() as TweetType));
 
-        return <div className="flex-grow"></div>;
+        return (
+            <div className="w-full h-screen flex justify-center items-center">
+                <Loader />
+            </div>
+        );
     }
 
     if (!session) router.replace("/");
@@ -202,7 +207,7 @@ const TweetDetails = ({ initialId }: { initialId: any }) => {
                         {tweet.date.day} {tweet.date.year}
                     </p>
                     {tweet.retweets.length || tweet.likes.length ? (
-                        <div className="mt-4 text-gray-500 flex items-center space-x-5 border-t py-3">
+                        <div className="mt-4 text-gray-500 flex items-center space-x-5 border-t pt-3">
                             {tweet.retweets.length ? (
                                 <p>
                                     <span className="font-semibold text-black">
@@ -274,7 +279,7 @@ const TweetDetails = ({ initialId }: { initialId: any }) => {
                             <UploadIcon className="btn-icon h-7" />
                         </button>
                     </div>
-                    <div className="flex items-center mt-4 space-x-2">
+                    <div className="flex items-center mt-4 space-x-4">
                         <div className="min-w-max">
                             <Image
                                 src={session?.user?.image as string}
@@ -286,7 +291,7 @@ const TweetDetails = ({ initialId }: { initialId: any }) => {
                         </div>
                         <form className="flex-grow">
                             <textarea
-                                className="w-full border-none outline-none"
+                                className="w-full border-none outline-none text-xl"
                                 placeholder="Tweet your reply"
                                 value={reply}
                                 onChange={(e) => setReply(e.target.value)}
