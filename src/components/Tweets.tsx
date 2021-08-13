@@ -36,7 +36,7 @@ const Tweets = () => {
         if (!tweets.length)
             return (
                 <div className="p-10 flex justify-center items-center">
-                    <h1 className="text-gray-400 text-2xl font-bold">
+                    <h1 className="text-gray-400 text-2xl font-emphasis">
                         No tweets!
                     </h1>
                 </div>

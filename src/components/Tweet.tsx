@@ -74,7 +74,7 @@ const Tweet: FunctionComponent<TweetType> = ({
                 </div>
                 <div className="flex-grow">
                     <div className="flex-grow flex items-center">
-                        <p className="font-bold">{author.name}</p>
+                        <p className="font-emphasis">{author.name}</p>
                         &nbsp;
                         {author.email ? (
                             <p className="text-gray-600 max-w-[4rem] lg:w-20 truncate">

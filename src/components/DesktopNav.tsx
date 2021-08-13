@@ -46,7 +46,7 @@ const DesktopNav = () => {
                 </g>
             </svg>
             <ul className="mt-2">
-                <li>
+                <li className="w-min">
                     <Link href="/">
                         <a
                             className={`link-container ${
@@ -58,43 +58,43 @@ const DesktopNav = () => {
                         </a>
                     </Link>
                 </li>
-                <li>
+                <li className="w-min">
                     <a href="#" className="link-container">
                         <HashtagIcon className="link-icon" />
                         <span className="link-text">Explore</span>
                     </a>
                 </li>
-                <li>
+                <li className="w-min">
                     <a href="#" className="link-container">
                         <BellIcon className="link-icon" />
                         <span className="link-text">Notifications</span>
                     </a>
                 </li>
-                <li>
+                <li className="w-min">
                     <a href="#" className="link-container">
                         <MailIcon className="link-icon" />
                         <span className="link-text">Messages</span>
                     </a>
                 </li>
-                <li>
+                <li className="w-min">
                     <a href="#" className="link-container">
                         <BookmarkIcon className="link-icon" />
                         <span className="link-text">Bookmarks</span>
                     </a>
                 </li>
-                <li>
+                <li className="w-min">
                     <a href="#" className="link-container">
                         <ViewListIcon className="link-icon" />
                         <span className="link-text">Lists</span>
                     </a>
                 </li>
-                <li>
+                <li className="w-min">
                     <a href="#" className="link-container">
                         <UserIcon className="link-icon" />
                         <span className="link-text">Profile</span>
                     </a>
                 </li>
-                <li>
+                <li className="w-min">
                     <a href="#" className="link-container">
                         <DotsCircleHorizontalIcon className="link-icon" />
                         <span className="link-text">More</span>
@@ -102,7 +102,7 @@ const DesktopNav = () => {
                 </li>
             </ul>
             <button
-                className="primary-btn mt-2"
+                className="primary-btn mt-2 text-lg shadow-lg"
                 onClick={() => {
                     router.push("/");
 
@@ -117,7 +117,7 @@ const DesktopNav = () => {
             >
                 Tweet
             </button>
-            <div className="relative mt-8 text-left flex items-center space-x-2 rounded-full p-2 pr-0 transition-colors hover:bg-blue-100">
+            <div className="relative mt-6 text-left flex items-center space-x-2 rounded-full p-2 pr-0 transition-colors hover:bg-blue-100">
                 <div className="min-w-max flex items-center">
                     <Image
                         className={`user-img transition-opacity ${
@@ -133,7 +133,7 @@ const DesktopNav = () => {
                     />
                 </div>
                 <div className="flex-grow">
-                    <p className="font-semibold whitespace-nowrap">
+                    <p className="font-emphasis whitespace-nowrap">
                         {session?.user?.name}
                     </p>
                     <p className="text-gray-500 text-sm">

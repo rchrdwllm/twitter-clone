@@ -22,7 +22,7 @@ const Trends = () => {
             </form>
             <div className="mt-4 rounded-xl overflow-hidden bg-gray-50">
                 <header className="p-3 flex justify-between items-center">
-                    <h1 className="font-bold whitespace-nowrap">
+                    <h1 className="font-emphasis whitespace-nowrap">
                         Trends for you
                     </h1>
                     <button className="btn text-black hover:text-blue-500">
@@ -33,7 +33,7 @@ const Trends = () => {
                     <article className="p-3 border-t flex space-x-20 items-start justify-between transition-colors cursor-pointer hover:bg-gray-100">
                         <div>
                             <p className="text-sm">Trending in Philippines</p>
-                            <h3 className="font-bold text-black">
+                            <h3 className="font-emphasis text-black">
                                 Friday the 13th
                             </h3>
                             <p className="text-sm">62.5K Tweets</p>
@@ -45,7 +45,7 @@ const Trends = () => {
                     <article className="p-3 border-t flex space-x-20 items-start justify-between transition-colors cursor-pointer hover:bg-gray-100">
                         <div>
                             <p className="text-sm">Trending in Philippines</p>
-                            <h3 className="font-bold text-black">
+                            <h3 className="font-emphasis text-black">
                                 Friday the 13th
                             </h3>
                             <p className="text-sm">62.5K Tweets</p>
@@ -57,7 +57,7 @@ const Trends = () => {
                     <article className="p-3 border-t flex space-x-20 items-start justify-between transition-colors cursor-pointer hover:bg-gray-100">
                         <div>
                             <p className="text-sm">Trending in Philippines</p>
-                            <h3 className="font-bold text-black">
+                            <h3 className="font-emphasis text-black">
                                 Friday the 13th
                             </h3>
                             <p className="text-sm">62.5K Tweets</p>
@@ -69,7 +69,7 @@ const Trends = () => {
                     <article className="p-3 border-t flex space-x-20 items-start justify-between transition-colors cursor-pointer hover:bg-gray-100">
                         <div>
                             <p className="text-sm">Trending in Philippines</p>
-                            <h3 className="font-bold text-black">
+                            <h3 className="font-emphasis text-black">
                                 Friday the 13th
                             </h3>
                             <p className="text-sm">62.5K Tweets</p>

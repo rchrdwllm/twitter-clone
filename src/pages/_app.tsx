@@ -1,4 +1,5 @@
 import "../styles/globalStyles.css";
+import "../styles/fonts/style.css";
 import Layout from "./layout";
 import Router from "next/router";
 import { Provider } from "next-auth/client";

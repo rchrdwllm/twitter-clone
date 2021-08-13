@@ -4,7 +4,9 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ["Inter", "sans-serif"],
+                sans: ["Chirp Regular", "Inter", "sans-serif"],
+                heading: ["ChirpExtended Heavy", "Inter", "sans-serif"],
+                emphasis: ["Chirp Bold", "Inter", "sans-serif"],
             },
         },
     },

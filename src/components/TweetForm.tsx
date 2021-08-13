@@ -87,7 +87,7 @@ const TweetForm = () => {
                 <form className="border-b">
                     <textarea
                         placeholder="What's happening?"
-                        className="tweet-form-input block w-full border-none outline-none"
+                        className="tweet-form-input block w-full border-none outline-none text-xl"
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
                     ></textarea>

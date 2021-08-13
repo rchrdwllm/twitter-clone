@@ -48,7 +48,7 @@ const MobileNav = () => {
                     }`}
                     onClick={() => setAnimate(!shouldAnimate)}
                 />
-                <h1 className="font-bold text-xl flex-grow">Home</h1>
+                <h1 className="font-emphasis text-xl flex-grow">Home</h1>
             </header>
             <motion.nav
                 variants={menuVariant}
@@ -57,7 +57,7 @@ const MobileNav = () => {
                 className="fixed top-0 left-0 z-20 h-screen w-9/12 overflow-y-scroll bg-white"
             >
                 <header className="flex justify-between items-center px-4 pr-3 py-3 border-b">
-                    <h1 className="font-bold text-xl">Account info</h1>
+                    <h1 className="font-emphasis text-xl">Account info</h1>
                     <button
                         className="btn"
                         onClick={() => setAnimate(!shouldAnimate)}
@@ -80,16 +80,16 @@ const MobileNav = () => {
                     </button>
                 </div>
                 <div className="px-4">
-                    <p className="font-bold">{session.user?.name}</p>
+                    <p className="font-emphasis">{session.user?.name}</p>
                     <p className="text-gray-500">{session.user?.email}</p>
                 </div>
                 <div className="flex space-x-7 text-gray-500 px-4 mt-4">
                     <p>
-                        <span className="font-bold text-black">0</span>{" "}
+                        <span className="font-emphasis text-black">0</span>{" "}
                         following
                     </p>
                     <p>
-                        <span className="font-bold text-black">10M</span>{" "}
+                        <span className="font-emphasis text-black">10M</span>{" "}
                         followers
                     </p>
                 </div>
