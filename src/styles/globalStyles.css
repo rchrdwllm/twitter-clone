@@ -11,7 +11,7 @@ button {
 @layer components {
     .log-in-btn {
         border: 1px solid rgb(229, 231, 235);
-        @apply flex justify-center items-center space-x-2 font-bold w-full rounded-full p-4 md:whitespace-nowrap md:w-min md:px-24;
+        @apply flex justify-center items-center space-x-2 font-emphasis w-full rounded-full p-4 md:whitespace-nowrap md:w-min md:px-24;
     }
 
     .log-in-btn-icon {
@@ -35,7 +35,7 @@ button {
     }
 
     .link-container.active {
-        @apply font-bold text-blue-500;
+        @apply font-emphasis text-blue-500;
     }
 
     .link-icon {
@@ -43,10 +43,10 @@ button {
     }
 
     .link-text {
-        @apply transition-colors text-current text-lg;
+        @apply transition-colors text-current text-xl;
     }
 
     .primary-btn {
-        @apply block w-full py-4 rounded-full bg-blue-500 font-semibold text-sm text-white transition-all hover:bg-blue-400 disabled:opacity-50 disabled:cursor-not-allowed;
+        @apply block w-full py-4 rounded-full bg-blue-500 font-emphasis text-sm text-white transition-all hover:bg-blue-400 disabled:opacity-50 disabled:cursor-not-allowed;
     }
 }
