@@ -153,7 +153,7 @@ const Home: FunctionComponent<HomeProps> = ({ session }) => {
             </Head>
             <div className="relative flex-grow">
                 {!mounted && (
-                    <div className="w-full h-screen flex justify-center items-center">
+                    <div className="absolute top-0 left-0 z-10 w-full h-screen flex justify-center items-center">
                         <Loader />
                     </div>
                 )}
