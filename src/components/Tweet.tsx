@@ -70,23 +70,26 @@ const Tweet: FunctionComponent<TweetType> = ({
                         blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO8/epfPQAIrwNEHKvToQAAAABJRU5ErkJggg=="
                     />
                 </div>
-                <div className="flex-grow">
-                    <div className="flex-grow flex items-center">
-                        <p className="font-emphasis">{author.name}</p>
-                        &nbsp;
-                        {author.email ? (
-                            <p className="text-gray-600 max-w-[4rem] lg:w-20 truncate">
-                                {author.email}
+                <div className="flex-grow overflow-hidden">
+                    <div className="flex-grow flex items-center justify-between">
+                        <div className="flex items-center whitespace-nowrap min-w-[0] max-w-[75%]">
+                            <p className="font-emphasis">{author.name}</p>
+                            &nbsp;
+                            {author.email ? (
+                                <p className="text-gray-600 truncate">
+                                    {author.email}
+                                </p>
+                            ) : (
+                                ""
+                            )}
+                            &nbsp;
+                            <p className="text-gray-600 truncate">
+                                · {date.month} {date.day}{" "}
+                                {edited ? "· Edited" : ""}
                             </p>
-                        ) : (
-                            ""
-                        )}
-                        &nbsp;
-                        <p className="text-gray-600">
-                            · {date.month} {date.day} {edited ? "· Edited" : ""}
-                        </p>
+                        </div>
                         {state.isAuthor ? (
-                            <div className="flex-grow flex justify-end">
+                            <div className="flex items-center">
                                 <button
                                     className="btn text-gray-500 hover:text-blue-500 pointer-events-auto"
                                     onClick={() =>
