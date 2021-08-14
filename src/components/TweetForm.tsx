@@ -48,7 +48,6 @@ export const addTweet = (content: string | number, session: Session) => {
             name: session?.user?.name as string,
         },
         edited: false,
-        editHistory: [],
     };
 
     firebase.firestore().collection("tweets").doc(id).set(newTweet);
