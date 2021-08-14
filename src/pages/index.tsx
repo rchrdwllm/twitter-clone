@@ -16,8 +16,6 @@ interface HomeProps {
 const Home: FunctionComponent<HomeProps> = ({ session }) => {
     const mounted = useSelector((state: RootStateOrAny) => state.mounted);
 
-    console.log(mounted);
-
     if (!session)
         return (
             <>

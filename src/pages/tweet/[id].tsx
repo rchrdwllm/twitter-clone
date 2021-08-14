@@ -21,24 +21,21 @@ import { MutableRefObject } from "react";
 import { motion } from "framer-motion";
 import { useAnimations } from "../../hooks/useAnimations";
 import Loader from "../../components/Loader";
+import { tweetInitialStates } from "../../reducers/tweets";
 
 const TweetDetails = ({ initialId }: { initialId: any }) => {
     const router = useRouter();
     const [session] = useSession();
     const { id } = router.query;
     const [tweet, setTweet] = useState<TweetType | null>(null);
-    const [state, dispatch] = useReducer(tweets, {
-        isAuthor: false,
-        liked: false,
-        retweeted: false,
-        toggleOptions: false,
-    });
+    const [state, dispatch] = useReducer(tweets, tweetInitialStates);
     const [reply, setReply] = useState<string | number>("");
     const [tweetsCollection, tweetsLoading] = useCollection(
         firebase.firestore().collection("tweets").orderBy("date", "desc"),
         {}
     );
     const [replies, setReplies] = useState<TweetType[] | null>(null);
+    const [edit, setEdit] = useState<string | number>("");
     const replyInput: MutableRefObject<null | HTMLTextAreaElement> =
         useRef<null | HTMLTextAreaElement>(null);
     const [mounted, setMounted] = useState<boolean>(false);
@@ -116,6 +113,7 @@ const TweetDetails = ({ initialId }: { initialId: any }) => {
                 image: session?.user?.image as string,
                 name: session?.user?.name as string,
             },
+            edited: false,
         };
 
         tweet?.replies.unshift(replyId);
@@ -130,13 +128,17 @@ const TweetDetails = ({ initialId }: { initialId: any }) => {
             });
     };
 
-    if (!tweet || !tweet.author) {
+    const getTweet = () => {
         firebase
             .firestore()
             .collection("tweets")
             .doc(id as string)
             .get()
             .then((snapshot) => setTweet(snapshot.data() as TweetType));
+    };
+
+    if (!tweet || !tweet.author) {
+        getTweet();
 
         return (
             <div className="w-full h-screen flex justify-center items-center">
@@ -192,7 +194,7 @@ const TweetDetails = ({ initialId }: { initialId: any }) => {
                             <button
                                 className="btn self-start text-gray-500 hover:text-blue-500"
                                 onClick={() =>
-                                    dispatch({ type: "TOGGLE_DELETE" })
+                                    dispatch({ type: "TOGGLE_OPTIONS" })
                                 }
                             >
                                 <DotsHorizontalIcon className="btn-icon" />
@@ -204,7 +206,8 @@ const TweetDetails = ({ initialId }: { initialId: any }) => {
                     <p className="text-2xl mt-4">{tweet.content}</p>
                     <p className="text-gray-500 mt-2">
                         {tweet.date.dateTweeted} · {tweet.date.month},{" "}
-                        {tweet.date.day} {tweet.date.year}
+                        {tweet.date.day} {tweet.date.year}{" "}
+                        {tweet.edited ? "· Edited" : ""}
                     </p>
                     {tweet.retweets.length || tweet.likes.length ? (
                         <div className="mt-4 text-gray-500 flex items-center space-x-5 border-t pt-3">
@@ -279,6 +282,45 @@ const TweetDetails = ({ initialId }: { initialId: any }) => {
                             <UploadIcon className="btn-icon h-7" />
                         </button>
                     </div>
+                    <motion.div
+                        variants={buttonVariant}
+                        initial="initial"
+                        animate={state.toggleEdit ? "animate" : "initial"}
+                        className="overflow-hidden h-0"
+                    >
+                        <div className="border-t mt-4 pt-3 pointer-events-auto flex space-x-5 items-center">
+                            <textarea
+                                className="block w-full border-none outline-none text-xl"
+                                placeholder="Edit this Tweet"
+                                value={edit}
+                                onChange={(e) => setEdit(e.target.value)}
+                                data-gramm_editor="false"
+                            ></textarea>
+                            <button
+                                className="primary-btn w-auto px-4 py-2"
+                                disabled={!edit}
+                                onClick={() => {
+                                    dispatch({
+                                        type: "EDIT_TWEET",
+                                        payload: {
+                                            id,
+                                            editedContent: edit,
+                                        },
+                                    });
+
+                                    setEdit("");
+
+                                    getTweet();
+
+                                    dispatch({
+                                        type: "TOGGLE_EDIT",
+                                    });
+                                }}
+                            >
+                                Edit
+                            </button>
+                        </div>
+                    </motion.div>
                     <div className="flex items-center mt-4 space-x-4">
                         <div className="min-w-max">
                             <Image
@@ -296,6 +338,7 @@ const TweetDetails = ({ initialId }: { initialId: any }) => {
                                 value={reply}
                                 onChange={(e) => setReply(e.target.value)}
                                 ref={replyInput}
+                                data-gramm_editor="false"
                             ></textarea>
                         </form>
                         <button
@@ -333,11 +376,12 @@ const TweetDetails = ({ initialId }: { initialId: any }) => {
                             className="tweet-options-btn"
                             onClick={() => {
                                 dispatch({
-                                    type: "DELETE_TWEET",
-                                    payload: { id },
+                                    type: "TOGGLE_EDIT",
                                 });
 
-                                router.replace("/");
+                                dispatch({
+                                    type: "TOGGLE_OPTIONS",
+                                });
                             }}
                         >
                             Edit Tweet
@@ -356,6 +400,7 @@ const TweetDetails = ({ initialId }: { initialId: any }) => {
                                   replies,
                                   retweets,
                                   type,
+                                  edited,
                               }) => (
                                   <Tweet
                                       author={author}
@@ -367,6 +412,7 @@ const TweetDetails = ({ initialId }: { initialId: any }) => {
                                       retweets={retweets}
                                       type={type}
                                       key={id}
+                                      edited={edited}
                                   />
                               )
                           )

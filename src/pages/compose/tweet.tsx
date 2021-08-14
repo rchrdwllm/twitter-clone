@@ -89,6 +89,7 @@ const ComposeTweet = () => {
                             className="tweet-form-input block w-full border-none outline-none"
                             value={content}
                             onChange={(e) => setContent(e.target.value)}
+                            data-gramm_editor="false"
                         ></textarea>
                     </form>
                     <div className="mt-4 flex items-center justify-between">

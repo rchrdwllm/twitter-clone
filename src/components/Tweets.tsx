@@ -55,6 +55,7 @@ const Tweets = () => {
                     replies,
                     retweets,
                     type,
+                    edited,
                 }) => (
                     <Tweet
                         author={author}
@@ -66,6 +67,7 @@ const Tweets = () => {
                         retweets={retweets}
                         type={type}
                         key={id}
+                        edited={edited}
                     />
                 )
             )}

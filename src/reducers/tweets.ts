@@ -20,6 +20,7 @@ export interface Tweet {
     likes: string[];
     replies: string[];
     retweets: string[];
+    edited: boolean;
 }
 
 interface TweetStates {
@@ -27,7 +28,16 @@ interface TweetStates {
     liked: boolean;
     retweeted: boolean;
     toggleOptions: boolean;
+    toggleEdit: boolean;
 }
+
+export const tweetInitialStates = {
+    isAuthor: false,
+    liked: false,
+    retweeted: false,
+    toggleOptions: false,
+    toggleEdit: false,
+};
 
 export const tweets = (state: TweetStates, action: AnyAction) => {
     switch (action.type) {
@@ -127,11 +137,42 @@ export const tweets = (state: TweetStates, action: AnyAction) => {
                 .firestore()
                 .collection("tweets")
                 .doc(action.payload.id)
-                .delete();
-        case "TOGGLE_DELETE":
+                .get()
+                .then((doc) => {
+                    (doc.data() as Tweet).replies.forEach((reply) => {
+                        firebase
+                            .firestore()
+                            .collection("tweets")
+                            .doc(reply)
+                            .delete();
+                    });
+
+                    firebase
+                        .firestore()
+                        .collection("tweets")
+                        .doc(action.payload.id)
+                        .delete();
+                });
+        case "TOGGLE_OPTIONS":
             return {
                 ...state,
                 toggleOptions: !state.toggleOptions,
+            };
+        case "EDIT_TWEET":
+            firebase
+                .firestore()
+                .collection("tweets")
+                .doc(action.payload.id)
+                .update({
+                    content: action.payload.editedContent,
+                    edited: true,
+                });
+
+            return state;
+        case "TOGGLE_EDIT":
+            return {
+                ...state,
+                toggleEdit: !state.toggleEdit,
             };
         default:
             return state;

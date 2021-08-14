@@ -8,6 +8,10 @@ button {
     @apply border-none outline-none;
 }
 
+textarea {
+    @apply bg-transparent;
+}
+
 .loader {
     border: 4px solid #e5e7eb;
     border-radius: 50%;

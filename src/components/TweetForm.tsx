@@ -47,6 +47,8 @@ export const addTweet = (content: string | number, session: Session) => {
             image: session?.user?.image as string,
             name: session?.user?.name as string,
         },
+        edited: false,
+        editHistory: [],
     };
 
     firebase.firestore().collection("tweets").doc(id).set(newTweet);
@@ -90,6 +92,7 @@ const TweetForm = () => {
                         className="tweet-form-input block w-full border-none outline-none text-xl"
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
+                        data-gramm_editor="false"
                     ></textarea>
                 </form>
                 <div className="mt-4 flex items-center justify-between">

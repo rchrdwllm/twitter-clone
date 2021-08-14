@@ -13,6 +13,7 @@ import { motion } from "framer-motion";
 import { useAnimations } from "../hooks/useAnimations";
 import { useSession } from "next-auth/client";
 import { useRouter } from "next/router";
+import { tweetInitialStates } from "../reducers/tweets";
 
 const Tweet: FunctionComponent<TweetType> = ({
     author,
@@ -22,17 +23,14 @@ const Tweet: FunctionComponent<TweetType> = ({
     likes,
     replies,
     retweets,
+    edited,
 }) => {
     const { buttonVariant } = useAnimations();
     const [session] = useSession();
     const router = useRouter();
-    const [state, dispatch] = useReducer(tweets, {
-        isAuthor: false,
-        liked: false,
-        retweeted: false,
-        toggleOptions: false,
-    });
+    const [state, dispatch] = useReducer(tweets, tweetInitialStates);
     const [mounted, setMounted] = useState<boolean>(false);
+    const [edit, setEdit] = useState<string | number>("");
 
     useEffect(() => {
         if (session) {
@@ -85,14 +83,14 @@ const Tweet: FunctionComponent<TweetType> = ({
                         )}
                         &nbsp;
                         <p className="text-gray-600">
-                            · {date.month} {date.day}
+                            · {date.month} {date.day} {edited ? "· Edited" : ""}
                         </p>
                         {state.isAuthor ? (
                             <div className="flex-grow flex justify-end">
                                 <button
                                     className="btn text-gray-500 hover:text-blue-500 pointer-events-auto"
                                     onClick={() =>
-                                        dispatch({ type: "TOGGLE_DELETE" })
+                                        dispatch({ type: "TOGGLE_OPTIONS" })
                                     }
                                 >
                                     <DotsHorizontalIcon className="btn-icon" />
@@ -163,6 +161,43 @@ const Tweet: FunctionComponent<TweetType> = ({
                             <UploadIcon className="btn-icon" />
                         </button>
                     </div>
+                    <motion.div
+                        variants={buttonVariant}
+                        initial="initial"
+                        animate={state.toggleEdit ? "animate" : "initial"}
+                        className="overflow-hidden h-0"
+                    >
+                        <div className="border-t mt-4 pt-3 pointer-events-auto flex space-x-5">
+                            <textarea
+                                className="block w-full border-none outline-none"
+                                placeholder="Edit this Tweet"
+                                value={edit}
+                                onChange={(e) => setEdit(e.target.value)}
+                                data-gramm_editor="false"
+                            ></textarea>
+                            <button
+                                className="primary-btn w-auto text-base px-4 py-2"
+                                disabled={!edit}
+                                onClick={() => {
+                                    dispatch({
+                                        type: "EDIT_TWEET",
+                                        payload: {
+                                            id,
+                                            editedContent: edit,
+                                        },
+                                    });
+
+                                    setEdit("");
+
+                                    dispatch({
+                                        type: "TOGGLE_EDIT",
+                                    });
+                                }}
+                            >
+                                Edit
+                            </button>
+                        </div>
+                    </motion.div>
                 </div>
             </div>
             <Link href={`/tweet/${id}`}>
@@ -187,12 +222,15 @@ const Tweet: FunctionComponent<TweetType> = ({
                 </button>
                 <button
                     className="tweet-options-btn"
-                    onClick={() =>
+                    onClick={() => {
                         dispatch({
-                            type: "DELETE_TWEET",
-                            payload: { id },
-                        })
-                    }
+                            type: "TOGGLE_EDIT",
+                        });
+
+                        dispatch({
+                            type: "TOGGLE_OPTIONS",
+                        });
+                    }}
                 >
                     Edit Tweet
                 </button>
