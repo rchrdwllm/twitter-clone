@@ -104,14 +104,14 @@ const DesktopNav = () => {
             <button
                 className="primary-btn mt-2 text-lg shadow-lg"
                 onClick={() => {
-                    router.push("/");
-
                     if (router.pathname === "/") {
                         (
                             document.querySelector(
                                 ".tweet-form-input"
                             ) as HTMLTextAreaElement
                         ).focus();
+                    } else {
+                        router.push("/");
                     }
                 }}
             >

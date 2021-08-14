@@ -43,7 +43,7 @@ textarea {
 @layer components {
     .log-in-btn {
         border: 1px solid #e5e7eb;
-        @apply flex justify-center items-center space-x-2 font-emphasis w-full rounded-full p-4 md:whitespace-nowrap md:w-min md:px-24;
+        @apply flex justify-center items-center space-x-2 font-emphasis w-full rounded-full p-4 transition-colors hover:bg-gray-200 md:whitespace-nowrap md:w-min md:px-24;
     }
 
     .log-in-btn-icon {
