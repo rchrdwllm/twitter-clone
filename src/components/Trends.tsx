@@ -30,7 +30,7 @@ const Trends = () => {
                     </button>
                 </header>
                 <main className="text-gray-400 border-b">
-                    <article className="p-3 border-t flex space-x-20 items-start justify-between transition-colors cursor-pointer hover:bg-gray-100">
+                    <article className="p-3 border-t flex space-x-44 items-start justify-between transition-colors cursor-pointer hover:bg-gray-100">
                         <div>
                             <p className="text-sm">Trending in Philippines</p>
                             <h3 className="font-emphasis text-black">
