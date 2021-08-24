@@ -1,5 +1,6 @@
 {
-    "name": "twitter-clone-ts",
+    "name": "twitter-clone",
+    "author": "Richard William",
     "version": "0.1.0",
     "private": true,
     "scripts": {
